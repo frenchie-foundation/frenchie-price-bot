@@ -8,6 +8,7 @@ function delay(ms) {
 async function getPriceFromPooCoin() {
   const browser = await puppeteer.launch({
     headless: true,
+    args: ['--no-sandbox'],
   });
 
   try {
