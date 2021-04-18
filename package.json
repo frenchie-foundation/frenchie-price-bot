@@ -1,0 +1,20 @@
+{
+  "name": "frenchie-price-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:spiry-capital/frenchie-price-bot.git",
+  "author": "Davi Rodrigues <developer.davi@gmail.com>",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "puppeteer": "^8.0.0",
+    "telegraf": "^4.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.24.0"
+  }
+}
