@@ -33,7 +33,7 @@ async function getPrice(ctx) {
     `<strong>Market cap:</strong> $${info.marketCap.toLocaleString()}`,
     `<strong>Current supply:</strong> ${info.supply.toLocaleString()}`,
     '',
-    `<strong>Links:</strong> <a href="https://frenchie.tech">Frenchie Website</a> | <a href="${constants.POO_COIN_CHART_URL}">Price Chart</a>`,
+    `<strong>Links:</strong> <a href="${constants.WEB_APP_URL}">Frenchie website</a> | <a href="${constants.PANCAKE_SWAP_URL}">Buy it on PancakeSwap</a> | <a href="${constants.POO_COIN_CHART_URL}">Price chart</a>`,
   ].join('\n');
 
   lastCall = new Date();
