@@ -23,7 +23,7 @@ async function getPriceFromPooCoin() {
     let loaded = await isLoaded();
 
     do {
-      await delay(2000);
+      await delay(500);
       loaded = await isLoaded();
     } while (!loaded);
 

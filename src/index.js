@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 // eslint-disable-next-line no-unused-vars
 const { Telegraf, Context } = require('telegraf');
 const getPriceFromPooCoin = require('./services/getPriceFromPooCoin');
+const constants = require('./utils/constants');
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ let lastReturn = null;
 async function getPrice(ctx) {
   const now = new Date();
 
-  if (lastCall && now - lastCall < 10000) {
+  if (lastCall && lastReturn && now - lastCall < 10000) {
     return ctx.reply(lastReturn, { parse_mode: 'HTML' });
   }
 
@@ -25,9 +26,15 @@ async function getPrice(ctx) {
     return ctx.reply('Sorry, something went wrong. Please try again!');
   }
 
-  const result = `<strong>[Frenchie Token Info]</strong>\n\n<strong>Current price:</strong> ${
-    info.price
-  } BNB\n<strong>Market cap:</strong> $${info.marketCap.toLocaleString()}\n<strong>Current supply:</strong> ${info.supply.toLocaleString()}`;
+  const result = [
+    '<strong>Frenchie Token Info (FREN)</strong>',
+    '',
+    `<strong>Current price:</strong> ${info.price} BNB`,
+    `<strong>Market cap:</strong> $${info.marketCap.toLocaleString()}`,
+    `<strong>Current supply:</strong> ${info.supply.toLocaleString()}`,
+    '',
+    `<strong>Links:</strong> <a href="https://frenchie.tech">Frenchie Website</a> | <a href="${constants.POO_COIN_CHART_URL}">Price Chart</a>`,
+  ].join('\n');
 
   lastCall = new Date();
   lastReturn = result;
