@@ -8,6 +8,7 @@ dotenv.config();
 
 let lastCall = null;
 let lastReturn = null;
+let isAboutToWelcomeMember = false;
 
 /**
  * Context
@@ -89,8 +90,14 @@ bot.help((ctx) => {
 });
 
 bot.on('new_chat_members', (ctx) => {
-  console.log('[!] New member');
-  handleNewMember(ctx);
+  if (!isAboutToWelcomeMember) {
+    isAboutToWelcomeMember = true;
+    setTimeout(() => {
+      console.log('[!] New member');
+      handleNewMember(ctx);
+      isAboutToWelcomeMember = false;
+    }, 1500);
+  }
 });
 
 for (const command of commands) {
