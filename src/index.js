@@ -44,6 +44,30 @@ async function getPrice(ctx) {
   });
 }
 
+/**
+ * Context
+ * @param {Context} ctx
+ */
+async function handleNewMember(ctx) {
+  const count = await ctx.getChatMembersCount();
+  const countText =
+    count < 2500
+      ? `🔥 ${
+          500 - (count % 500)
+        } Telegram Users until our next 5% $FREN BURN EVENT 🔥`
+      : '';
+
+  const text = [
+    'Welcome to Frenchie Network! You are here at the perfect moment in our growth! 🚀',
+    '',
+    countText,
+    '',
+    'This is a community based TOKEN that thrives for honesty and transparency. Share to your friends and to your groups in order for us to grow. 💎',
+  ].join('\n');
+
+  ctx.reply(text);
+}
+
 const commands = [
   {
     name: 'frenchie',
@@ -62,6 +86,11 @@ const bot = new Telegraf(BOT_TOKEN);
 bot.help((ctx) => {
   ctx.reply('Hi, the available commands are:');
   ctx.reply(commands.map((x) => `- /${x.name}`).join('\n'));
+});
+
+bot.on('new_chat_members', (ctx) => {
+  console.log('[!] New member');
+  handleNewMember(ctx);
 });
 
 for (const command of commands) {
