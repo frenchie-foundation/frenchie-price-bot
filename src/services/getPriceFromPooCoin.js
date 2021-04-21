@@ -50,7 +50,7 @@ async function getPriceFromPooCoin() {
     const marketCap = Number.parseInt(marketCapText.replace(/,/g, ''));
     const supply = Number.parseInt(supplyText.replace(/,/g, ''));
     const price = marketCap / supply;
-    const usdPrice = price * bnbPrice;
+    const usdPrice = price / bnbPrice;
 
     return {
       supply,
