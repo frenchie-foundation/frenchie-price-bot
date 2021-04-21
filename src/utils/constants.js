@@ -4,6 +4,10 @@ const constants = {
   PANCAKE_SWAP_URL:
     'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af',
   WEB_APP_URL: 'https://frenchie.tech',
+  DEXGURU_URL:
+    'https://dex.guru/token/0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af-bsc',
+  BSC_SCAN_URL:
+    'https://bscscan.com/token/0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af',
 };
 
 module.exports = constants;
