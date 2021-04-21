@@ -30,7 +30,8 @@ async function getPrice(ctx) {
   const result = [
     '<strong>Frenchie Token Info (FREN)</strong>',
     '',
-    `<strong>Current price:</strong> ${info.price} BNB`,
+    `<strong>Current price (BNB):</strong> ${info.price}`,
+    `<strong>Current price (USD):</strong> ${info.usdPrice}`,
     `<strong>Market cap:</strong> $${info.marketCap.toLocaleString()}`,
     `<strong>Current supply:</strong> ${info.supply.toLocaleString()}`,
     '',
