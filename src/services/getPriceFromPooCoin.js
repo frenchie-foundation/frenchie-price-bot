@@ -40,14 +40,22 @@ async function getPriceFromPooCoin() {
     const supplyText = supplyHTML
       .match(/Total Supply:<br>(.*)<hr>/)[1]
       .split('<hr>')[0];
+    const totalBNB = supplyHTML.match(/\/BNB LP BNB Holdings:<br>(.*) BNB/)[1];
+    const totalBNBDollar = supplyHTML.match(/\(\$(.*)\)/)[1];
+
+    const bnbPrice =
+      Number.parseFloat(totalBNB) /
+      Number.parseFloat(totalBNBDollar.replace(/,/, ''));
 
     const marketCap = Number.parseInt(marketCapText.replace(/,/g, ''));
     const supply = Number.parseInt(supplyText.replace(/,/g, ''));
     const price = marketCap / supply;
+    const usdPrice = price * bnbPrice;
 
     return {
       supply,
       marketCap,
+      usdPrice: usdPrice.toFixed(18),
       price: price.toFixed(18),
     };
   } catch (e) {
