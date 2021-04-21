@@ -8,7 +8,7 @@ dotenv.config();
 
 let lastCall = null;
 let lastReturn = null;
-let isAboutToWelcomeMember = false;
+// let isAboutToWelcomeMember = false;
 
 /**
  * Context
@@ -90,16 +90,16 @@ bot.help((ctx) => {
   ctx.reply(commands.map((x) => `- /${x.name}`).join('\n'));
 });
 
-bot.on('new_chat_members', (ctx) => {
-  if (!isAboutToWelcomeMember) {
-    isAboutToWelcomeMember = true;
-    setTimeout(() => {
-      console.log('[!] New member');
-      handleNewMember(ctx);
-      isAboutToWelcomeMember = false;
-    }, 1500);
-  }
-});
+// bot.on('new_chat_members', (ctx) => {
+//   if (!isAboutToWelcomeMember) {
+//     isAboutToWelcomeMember = true;
+//     setTimeout(() => {
+//       console.log('[!] New member');
+//       handleNewMember(ctx);
+//       isAboutToWelcomeMember = false;
+//     }, 1500);
+//   }
+// });
 
 for (const command of commands) {
   bot.command(command.name, (ctx) => {
