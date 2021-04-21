@@ -18,8 +18,10 @@ async function handleGetPrice(ctx) {
     return ctx.reply(lastReturn, { parse_mode: 'HTML' });
   }
 
-  const info = await getPriceFromPooCoin();
-  const holders = await getHoldersFromBscScan();
+  const [info, holders] = await Promise.all([
+    getPriceFromPooCoin(),
+    getHoldersFromBscScan(),
+  ]);
 
   if (info.error || holders.error) {
     return ctx.reply('Sorry, something went wrong. Please try again!');
