@@ -55,7 +55,7 @@ async function getPriceFromPooCoin() {
     return {
       supply,
       marketCap,
-      usdPrice: usdPrice.toFixed(18),
+      usdPrice: usdPrice.toFixed(4),
       price: price.toFixed(18),
     };
   } catch (e) {
