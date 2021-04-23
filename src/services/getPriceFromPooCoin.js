@@ -7,7 +7,7 @@ function delay(ms) {
 
 async function getPriceFromPooCoin() {
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: ['--no-sandbox'],
   });
 
@@ -17,7 +17,7 @@ async function getPriceFromPooCoin() {
 
     const isLoaded = () =>
       page.$(
-        '#root > div > div.d-md-block.pt-2.flex-grow-1.h-100 > div.d-flex.flex-column.flex-grow-1.pb-2.px-2 > div > div.flex-grow-1 > div.d-flex.align-items-center.flex-wrap > span > span'
+        '#root > div > div.d-md-block.flex-grow-1 > div.d-flex.flex-column.flex-grow-1.pe-2 > div > div.flex-grow-1.ps-2.pt-2.lh-1 > div.d-flex.align-items-start.flex-wrap > div.ps-2.d-flex.align-items-center.flex-grow-1 > div > div.d-flex > div > span'
       );
 
     let loaded = await isLoaded();
@@ -28,18 +28,18 @@ async function getPriceFromPooCoin() {
     } while (!loaded);
 
     const marketCapHTML = await page.$eval(
-      '#root > div > div.d-md-block.pt-2.flex-grow-1.h-100 > div.d-flex.flex-column.flex-grow-1.pb-2.px-2 > div > div.TokenChart_stats__3732U.d-block > div.text-small > span:nth-child(4)',
+      '#root > div > div.d-md-block.flex-grow-1 > div.d-flex.flex-column.flex-grow-1.pe-2 > div > div.TokenChart_stats__3732U.d-block.bg-dark-1.shadow.pt-3.text-small > div.px-3 > span:nth-child(4)',
       (e) => e.innerHTML
     );
     const supplyHTML = await page.$eval(
-      '#root > div > div.d-md-block.pt-2.flex-grow-1.h-100 > div.d-flex.flex-column.flex-grow-1.pb-2.px-2 > div > div.TokenChart_stats__3732U.d-block > div.text-small',
+      '#root > div > div.d-md-block.flex-grow-1 > div.d-flex.flex-column.flex-grow-1.pe-2 > div > div.TokenChart_stats__3732U.d-block.bg-dark-1.shadow.pt-3.text-small > div.px-3',
       (e) => e.innerHTML
     );
 
     const marketCapText = marketCapHTML.match(/\$(.*)/)[1];
     const supplyText = supplyHTML
-      .match(/Total Supply:<br>(.*)<hr>/)[1]
-      .split('<hr>')[0];
+      .match(/Total Supply:<br>(.*)<hr/)[1]
+      .split('<hr')[0];
     const totalBNB = supplyHTML.match(/\/BNB LP BNB Holdings:<br>(.*) BNB/)[1];
     const totalBNBDollar = supplyHTML.match(/\(\$(.*)\)/)[1];
 
