@@ -39,6 +39,7 @@ async function handleGetPrice(ctx) {
     '<strong>Links:</strong>',
     `<a href="${constants.WEB_APP_URL}">Frenchie Website</a>`,
     `<a href="${constants.PANCAKE_SWAP_URL}">Buy it on PancakeSwap</a>`,
+    `<a href="${constants.ONEINCH}">Buy it on 1inch</a>`,
     `<a href="${constants.DEXGURU_URL}">Buy it on DexGuru</a>`,
     `<a href="${constants.POO_COIN_CHART_URL}">PooCoin Price chart</a>`,
   ].join('\n');
