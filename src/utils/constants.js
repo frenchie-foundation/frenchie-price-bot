@@ -8,6 +8,8 @@ const constants = {
     'https://dex.guru/token/0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af-bsc',
   BSC_SCAN_URL:
     'https://bscscan.com/token/0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af',
+  ONEINCH:
+    'https://app.1inch.io/#/56/swap/BNB/0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af',
 };
 
 module.exports = constants;
