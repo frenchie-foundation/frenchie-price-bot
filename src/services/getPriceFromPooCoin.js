@@ -32,7 +32,7 @@ async function getPriceFromPooCoin() {
       (e) => e.innerHTML
     );
     const supplyHTML = await page.$eval(
-      '#root > div > div.d-md-block.flex-grow-1 > div.d-flex.flex-column.flex-grow-1.pe-2 > div > div.TokenChart_stats__3732U.d-block.bg-dark-1.shadow.pt-3.text-small > div.px-3',
+      '#root > div > div.d-md-block.flex-grow-1 > div.d-flex.flex-column.flex-grow-1.pe-2 > div > div.TokenChart_stats__3732U.d-block.bg-dark-1.shadow.pt-3.text-small > div:nth-child(5)',
       (e) => e.innerHTML
     );
 
@@ -58,6 +58,7 @@ async function getPriceFromPooCoin() {
       price: (bnbPrice * price).toFixed(18),
     };
   } catch (e) {
+    console.error(e);
     return {
       error: e.message,
     };
