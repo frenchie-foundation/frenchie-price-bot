@@ -3,6 +3,7 @@ const constants = require('../utils/constants');
 
 let page = null;
 let browser = null;
+let timeout = null;
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -73,6 +74,13 @@ async function getPriceFromBoggedFinance() {
     return {
       error: e.message,
     };
+  } finally {
+    if (!timeout) {
+      timeout = setTimeout(() => {
+        timeout = null;
+        page.reload();
+      }, 60000);
+    }
   }
 }
 
