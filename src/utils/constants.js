@@ -1,4 +1,6 @@
 const constants = {
+  BOGGED_FINANCE_CHART_URL:
+    'https://charts.bogged.finance/?token=0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af',
   POO_COIN_CHART_URL:
     'https://poocoin.app/tokens/0x13958e1eb63dFB8540Eaf6ed7DcbBc1A60FD52AF',
   PANCAKE_SWAP_URL:

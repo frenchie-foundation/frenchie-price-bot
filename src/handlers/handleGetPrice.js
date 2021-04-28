@@ -1,14 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 const { Context } = require('telegraf');
-const getHoldersFromBscScan = require('../services/getHoldersFromBscScan');
-const getPriceFromPooCoin = require('../services/getPriceFromPooCoin');
+const getHoldersFromBscScan = require('../services/getInfoFromBscScan');
+const getPriceFromBoggedFinance = require('../services/getPriceFromBoggedFinance');
 const constants = require('../utils/constants');
 
 let lastCall = null;
 let lastReturn = null;
 
 /**
- * Context
+ * Get price handler
  * @param {Context} ctx
  */
 async function handleGetPrice(ctx) {
@@ -18,23 +18,32 @@ async function handleGetPrice(ctx) {
     return ctx.reply(lastReturn, { parse_mode: 'HTML' });
   }
 
-  const [info, holders] = await Promise.all([
-    getPriceFromPooCoin(),
+  const message = await ctx.reply('Fetching data...');
+
+  const [info, bsc] = await Promise.all([
+    getPriceFromBoggedFinance(),
     getHoldersFromBscScan(),
   ]);
 
-  if (info.error || holders.error) {
-    return ctx.reply('Sorry, something went wrong. Please try again!');
+  if (info.error || bsc.error) {
+    return ctx.telegram.editMessageText(
+      message.chat.id,
+      message.message_id,
+      null,
+      'Sorry, something went wrong. Please try again!'
+    );
   }
 
   const result = [
     '<strong>Frenchie Token Info (FREN)</strong>',
     '',
-    `<strong>Current price (BNB):</strong> ${info.price}`,
-    `<strong>Current price (USD):</strong> ${info.usdPrice}`,
-    `<strong>Market cap:</strong> $${info.marketCap.toLocaleString()}`,
-    `<strong>Current supply:</strong> ${info.supply.toLocaleString()}`,
-    `<strong>Holders:</strong> ${holders.holdersNum}`,
+    `<strong>Current price (USD):</strong> ${info.price}`,
+    `<strong>Daily change:</strong> ${info.dailyChange}`,
+    `<strong>Daily volume:</strong> ${info.dailyVolume}`,
+    `<strong>Market cap:</strong> ${info.marketCap}`,
+    `<strong>Liquidity:</strong> ${info.liquidity}`,
+    `<strong>Current supply:</strong> ${bsc.supply}`,
+    `<strong>Holders:</strong> ${bsc.holdersNum}`,
     '',
     '<strong>Links:</strong>',
     `<a href="${constants.WEB_APP_URL}">Frenchie Website</a>`,
@@ -47,9 +56,15 @@ async function handleGetPrice(ctx) {
   lastCall = new Date();
   lastReturn = result;
 
-  ctx.reply(result, {
-    parse_mode: 'HTML',
-  });
+  ctx.telegram.editMessageText(
+    message.chat.id,
+    message.message_id,
+    null,
+    result,
+    {
+      parse_mode: 'HTML',
+    }
+  );
 }
 
 module.exports = handleGetPrice;
