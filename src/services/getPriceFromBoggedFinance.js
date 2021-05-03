@@ -23,7 +23,7 @@ async function getPriceFromBoggedFinance() {
     const isLoaded = async () => {
       try {
         const exists = await page.$eval(
-          'body > div > div.flex-1.flex.flex-col.overflow-hidden > main > div > div > div > div > div.row-span-1.col-span-12.text-white.justify-between.flex.flex-col.lg\\:flex-row.lg\\:items-center > div.flex.flex-row.mr-4.w-full.overflow-y-hidden.overflow-x-hidden.flex-wrap.sm\\:px-0.px-2 > div.my-1.flex.flex-row.justify-start.space-x-3.md\\:pt-0.pt-3.sm\\:space-x-6.w-full.md\\:w-auto.border-t.md\\:border-t-0.border-gray-200.dark\\:border-gray-700 > span:nth-child(1) > h4',
+          'body > div > div.flex-1.flex.flex-col.overflow-hidden > main > div > div > div > div > div.row-span-1.col-span-12.text-white.justify-between.flex.flex-col.lg\\:flex-row.lg\\:items-center > div.flex.flex-row.mr-4.w-full.overflow-y-hidden.overflow-x-hidden.flex-wrap.sm\\:px-0.px-2 > div.my-1.flex.flex-row.justify-start.space-x-3.md\\:pt-0.pt-3.sm\\:space-x-6.w-full.md\\:w-auto.border-t.md\\:border-t-0.border-gray-200.dark\\:border-gray-700 > span:nth-child(2) > h4',
           (e) => e.innerText
         );
         if (exists) {
@@ -62,6 +62,8 @@ async function getPriceFromBoggedFinance() {
       'body > div > div.flex-1.flex.flex-col.overflow-hidden > main > div > div > div > div > div.row-span-1.col-span-12.text-white.justify-between.flex.flex-col.lg\\:flex-row.lg\\:items-center > div.flex.flex-row.mr-4.w-full.overflow-y-hidden.overflow-x-hidden.flex-wrap.sm\\:px-0.px-2 > div.my-1.flex.flex-row.space-x-3.sm\\:space-x-6.mr-6.mb-3.md\\:mb-0 > span:nth-child(3) > h4',
       (e) => e.innerText
     );
+
+    console.log('bogged ok');
 
     return {
       marketCap,
