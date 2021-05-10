@@ -1,4 +1,5 @@
 const constants = {
+  COINGECKO_URL: 'https://www.coingecko.com/en/coins/frenchie',
   BOGGED_FINANCE_CHART_URL:
     'https://charts.bogged.finance/?token=0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af',
   POO_COIN_CHART_URL:

@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 const { Context } = require('telegraf');
-const getHoldersFromBscScan = require('../services/getInfoFromBscScan');
-const getPriceFromBoggedFinance = require('../services/getPriceFromBoggedFinance');
+
+const getInfoFromBscScan = require('../services/getInfoFromBscScan');
+const getPriceFrom1inch = require('../services/getPriceFrom1inch');
 const constants = require('../utils/constants');
 
 let lastCall = null;
@@ -20,12 +21,13 @@ async function handleGetPrice(ctx) {
 
   const message = await ctx.reply('Fetching data...');
 
-  const [info, bsc] = await Promise.all([
-    getPriceFromBoggedFinance(),
-    getHoldersFromBscScan(),
+  const [price, bsc] = await Promise.all([
+    getPriceFrom1inch(),
+    getInfoFromBscScan(),
   ]);
 
-  if (info.error || bsc.error) {
+  if (price.error || bsc.error) {
+    console.log(price, bsc);
     return ctx.telegram.editMessageText(
       message.chat.id,
       message.message_id,
@@ -37,11 +39,10 @@ async function handleGetPrice(ctx) {
   const result = [
     '<strong>Frenchie Token Info (FREN)</strong>',
     '',
-    `<strong>Current price (USD):</strong> ${info.price}`,
-    `<strong>24h change:</strong> ${info.dailyChange}`,
-    `<strong>24h volume:</strong> ${info.dailyVolume}`,
-    `<strong>Market cap:</strong> ${info.marketCap}`,
-    `<strong>Liquidity:</strong> ${info.liquidity}`,
+    `<strong>Current price (USD):</strong> ${price.usdPrice
+      .toString()
+      .replace('.', ',')}`,
+    `<strong>Market cap:</strong> ${bsc.marketCap}`,
     `<strong>Current supply:</strong> ${bsc.supply}`,
     `<strong>Holders:</strong> ${bsc.holdersNum}`,
     '',
@@ -51,6 +52,7 @@ async function handleGetPrice(ctx) {
     `<a href="${constants.ONEINCH}">Buy it on 1inch</a>`,
     `<a href="${constants.DEXGURU_URL}">Buy it on DexGuru</a>`,
     `<a href="${constants.POO_COIN_CHART_URL}">PooCoin Price chart</a>`,
+    `<a href="${constants.COINGECKO_URL}">CoinGecko</a>`,
   ].join('\n');
 
   lastCall = new Date();

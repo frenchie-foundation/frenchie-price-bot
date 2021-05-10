@@ -50,9 +50,11 @@ async function getInfoFromBscScan() {
       '#ContentPlaceHolder1_divSummary > div.row.mb-4 > div.col-md-6.mb-3.mb-md-0 > div > div.card-body > div.row.align-items-center > div.col-md-8.font-weight-medium > span.hash-tag.text-truncate',
       (e) => e.innerText
     );
+    const marketCap = await page.$eval('#pricebutton', (e) => e.innerText);
 
     return {
       holdersNum: holders,
+      marketCap,
       supply,
     };
   } catch (e) {
