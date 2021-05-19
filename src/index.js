@@ -2,6 +2,9 @@ const dotenv = require('dotenv');
 const { Telegraf } = require('telegraf');
 
 const handleGetPrice = require('./handlers/handleGetPrice');
+const getPriceFromPancake = require('./services/getPriceFromPancake');
+
+getPriceFromPancake();
 
 dotenv.config();
 
