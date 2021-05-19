@@ -13,6 +13,10 @@ const constants = {
     'https://bscscan.com/token/0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af',
   ONEINCH:
     'https://app.1inch.io/#/56/swap/BNB/0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af',
+  FREN_ADDRESS: '0x13958e1eb63dfb8540eaf6ed7dcbbc1a60fd52af',
+  USDT_ADDRESS: '0x55d398326f99059ff775485246999027b3197955',
+  WBNB_ADDRESS: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
+  PANCAKE_ROUTER_ADDRESS: '0x05ff2b0db69458a0750badebc4f9e13add608c7f',
 };
 
 module.exports = constants;

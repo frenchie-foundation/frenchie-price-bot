@@ -2,7 +2,7 @@
 const { Context } = require('telegraf');
 
 const getInfoFromBscScan = require('../services/getInfoFromBscScan');
-const getPriceFrom1inch = require('../services/getPriceFrom1inch');
+const getPriceFromPancake = require('../services/getPriceFromPancake');
 const constants = require('../utils/constants');
 
 let lastCall = null;
@@ -22,7 +22,7 @@ async function handleGetPrice(ctx) {
   const message = await ctx.reply('Fetching data...');
 
   const [price, bsc] = await Promise.all([
-    getPriceFrom1inch(),
+    getPriceFromPancake(),
     getInfoFromBscScan(),
   ]);
 
