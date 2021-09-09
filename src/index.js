@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 const { Telegraf } = require('telegraf');
 
 const handleGetPrice = require('./handlers/handleGetPrice');
-const handleGetUSDPrice = require('./handlers/handleGetUSDPrice');
+const handleGetShortInfo = require('./handlers/handleGetShortInfo');
 const getPriceFromPancake = require('./services/getPriceFromPancake');
 
 getPriceFromPancake();
@@ -20,7 +20,7 @@ const commands = [
   },
   {
     name: 'usd',
-    callback: handleGetUSDPrice,
+    callback: handleGetShortInfo,
   },
 ];
 

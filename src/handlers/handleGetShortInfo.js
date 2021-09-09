@@ -11,7 +11,7 @@ let lastReturn = null;
  * Get price handler
  * @param {Context} ctx
  */
-async function handleGetUSDPrice(ctx) {
+async function handleGetShortInfo(ctx) {
   const now = new Date();
 
   if (lastCall && lastReturn && now - lastCall < 10000) {
@@ -56,4 +56,4 @@ async function handleGetUSDPrice(ctx) {
   );
 }
 
-module.exports = handleGetUSDPrice;
+module.exports = handleGetShortInfo;
