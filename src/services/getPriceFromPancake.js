@@ -24,7 +24,7 @@ async function getPriceFromPancake() {
 
   const [, , usdtPrice] = amounts;
 
-  const usdPrice = new BigNumber(usdtPrice).multipliedBy(1e-18).toString();
+  const usdPrice = new BigNumber(usdtPrice).multipliedBy(1e-18).toFixed(10);
 
   return {
     usdPrice,
