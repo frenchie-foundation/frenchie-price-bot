@@ -19,7 +19,7 @@ const commands = [
     callback: handleGetPrice,
   },
   {
-    name: 'usd',
+    name: 'short',
     callback: handleGetShortInfo,
   },
 ];
