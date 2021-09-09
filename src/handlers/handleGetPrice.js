@@ -39,9 +39,7 @@ async function handleGetPrice(ctx) {
   const result = [
     '<strong>Frenchie Token Info (FREN)</strong>',
     '',
-    `<strong>Current price (USD):</strong> ${price.usdPrice
-      .toString()
-      .replace('.', ',')}`,
+    `<strong>Current price (USD):</strong> ${price.usdPrice.toString()}`,
     `<strong>Market cap:</strong> ${bsc.marketCap}`,
     `<strong>Current supply:</strong> ${bsc.supply}`,
     `<strong>Holders:</strong> ${bsc.holdersNum}`,

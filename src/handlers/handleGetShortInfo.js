@@ -36,9 +36,7 @@ async function handleGetShortInfo(ctx) {
   }
 
   const result = [
-    `<strong>Current price (USD):</strong> ${price.usdPrice
-      .toString()
-      .replace('.', ',')}`,
+    `<strong>Current price (USD):</strong> ${price.usdPrice.toString()}`,
     `<strong>Market cap:</strong> ${bsc.marketCap}`,
   ].join('\n');
 
