@@ -1,8 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const { Context } = require('telegraf');
 
-const getInfoFromBscScan = require('../services/getInfoFromBscScan');
-const getPriceFromPancake = require('../services/getPriceFromPancake');
+const getTokenInfo = require('../services/getTokenInfo');
 
 let lastCall = null;
 let lastReturn = null;
@@ -11,7 +10,7 @@ let lastReturn = null;
  * Get price handler
  * @param {Context} ctx
  */
-async function handleGetShortInfo(ctx) {
+async function handleGetPrice(ctx) {
   const now = new Date();
 
   if (lastCall && lastReturn && now - lastCall < 10000) {
@@ -20,13 +19,28 @@ async function handleGetShortInfo(ctx) {
 
   const message = await ctx.reply('Fetching data...');
 
-  const [price, bsc] = await Promise.all([
-    getPriceFromPancake(),
-    getInfoFromBscScan(),
-  ]);
+  try {
+    const { price, marketcap } = await getTokenInfo();
 
-  if (price.error || bsc.error) {
-    console.log(price, bsc);
+    const result = [
+      `<strong>Current price (USD):</strong> ${price.toString()}`,
+      `<strong>Market cap:</strong> $${marketcap}`,
+    ].join('\n');
+
+    lastCall = new Date();
+    lastReturn = result;
+
+    ctx.telegram.editMessageText(
+      message.chat.id,
+      message.message_id,
+      null,
+      result,
+      {
+        parse_mode: 'HTML',
+      }
+    );
+  } catch (error) {
+    console.error(error);
     return ctx.telegram.editMessageText(
       message.chat.id,
       message.message_id,
@@ -34,24 +48,6 @@ async function handleGetShortInfo(ctx) {
       'Sorry, something went wrong. Please try again!'
     );
   }
-
-  const result = [
-    `<strong>Current price (USD):</strong> ${price.usdPrice.toString()}`,
-    `<strong>Market cap:</strong> ${bsc.marketCap}`,
-  ].join('\n');
-
-  lastCall = new Date();
-  lastReturn = result;
-
-  ctx.telegram.editMessageText(
-    message.chat.id,
-    message.message_id,
-    null,
-    result,
-    {
-      parse_mode: 'HTML',
-    }
-  );
 }
 
-module.exports = handleGetShortInfo;
+module.exports = handleGetPrice;
