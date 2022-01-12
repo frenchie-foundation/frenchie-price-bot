@@ -29,6 +29,7 @@ async function handleGetPrice(ctx) {
       `<strong>Current price (USD):</strong> ${price.toString()}`,
       `<strong>Market cap:</strong> $${marketcap}`,
       `<strong>Current supply:</strong> ${supply.toLocaleString()}`,
+      `<strong>Address:</strong> ${constants.FREN_ADDRESS}`,
       '',
       '<strong>Links:</strong>',
       `<a href="${constants.WEB_APP_URL}">Frenchie Website</a>`,
