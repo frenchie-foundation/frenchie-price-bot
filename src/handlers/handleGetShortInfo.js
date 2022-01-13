@@ -2,7 +2,6 @@
 const { Context } = require('telegraf');
 
 const getTokenInfo = require('../services/getTokenInfo');
-const constants = require('../utils/constants');
 
 let lastCall = null;
 let lastReturn = null;
@@ -26,7 +25,6 @@ async function handleGetPrice(ctx) {
     const result = [
       `<strong>Current price (USD):</strong> ${price.toString()}`,
       `<strong>Market cap:</strong> $${marketcap}`,
-      `<strong>Address:</strong> ${constants.FREN_ADDRESS}`,
     ].join('\n');
 
     lastCall = new Date();
